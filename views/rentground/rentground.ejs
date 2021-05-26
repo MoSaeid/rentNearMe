@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hi</title>
+</head>
+<body>
+	<ul>
+		<% for(let i of rentground_data) { %>
+
+		  <a href="/rentgrounds/<%=i._id%>"><%= `${i.title} on (( ${i.location} ))` %></a> <br>
+		  		  
+		<% } %>
+	</ul>
+
+	<a href="/rentgrounds/new"> NEW Rent AD</a>
+</body>
+</html>

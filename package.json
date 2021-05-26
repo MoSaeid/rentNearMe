@@ -1,0 +1,17 @@
+{
+  "name": "rent_near_me",
+  "version": "0.1.0",
+  "description": "Web app helps users to publish and find places to rent or sale",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mohammed Z. Saeid",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.12.8"
+  }
+}

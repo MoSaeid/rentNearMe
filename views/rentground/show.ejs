@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HELO</title>
+</head>
+<body>
+    <p>
+ <%= `${rentground_data.title} on (( ${rentground_data.location} ))` %>
+    </p>
+<form method="POST" action="/rentgrounds/<%=rentground_data._id%>?_method=DELETE">
+    <button>DELETE</button>
+
+</form>
+
+ <footer>
+ 	<a href="/rentgrounds/<%=rentground_data._id%>/edit">EDIT</a>
+ 	<br>
+ 	<a href="/rentgrounds">SHOW ALL Rent Near Me</a>
+
+ </footer>
+</body>
+</html>

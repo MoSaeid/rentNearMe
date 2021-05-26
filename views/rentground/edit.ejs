@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>EDIT</title>
+</head>
+<body>
+	<form method="POST" action="/rentgrounds/<%=rentground_data._id%>?_method=PUT">
+
+		<input type="text" name="title" value="<%=rentground_data.title%>"> <br>
+		<input type="text" name="location" value="<%=rentground_data.location%>">
+<br>
+		<button>Update</button>
+
+	</form>
+</body>
+</html>
