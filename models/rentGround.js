@@ -3,11 +3,13 @@ const Schema = mongoose.Schema;
 
 const rentGroundSchema = new Schema({
 	title:String,
-	price:String,
+	price:Number,
 	description:String,
-	location:String
+	location:String,
+	image: String
 
-})
+});
 
 
-module.exports = mongoose.model('Ground', rentGroundSchema);
+module.exports = 
+	mongoose.model('Ground', rentGroundSchema);

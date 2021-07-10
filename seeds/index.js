@@ -6,7 +6,9 @@ const rentGround = require('../models/rentGround.js');
 mongoose.connect('mongodb://localhost:27017/rentAPP', {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+     useFindAndModify: false
+
 })
 .then(() => {
     console.log('gooood')
@@ -28,11 +30,17 @@ const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
     await rentGround.deleteMany({});
-    for (let i = 0; i < 10; i++) {
-        const random1000 = Math.floor(Math.random() * 1000);
+
+    for (let i = 0; i < 100; i++) {
+            let random1000 = Math.floor(Math.random() * 100) * 10;
+    let randomPrice = Math.floor(Math.random() * 20) + 10;
+
         const camp = new rentGround({
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
-            title: `${sample(seedHelper.descriptors)} ${sample(seedHelper.places)}`
+            title: `${sample(seedHelper.descriptors)} ${sample(seedHelper.places)}`,
+            image: 'https://source.unsplash.com/collection/220381',
+            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit',
+            price: randomPrice
         });
         await camp.save();
     }
@@ -41,3 +49,5 @@ const seedDB = async () => {
 seedDB().then(() => {
     mongoose.connection.close();
 })
+
+//https://source.unsplash.com/collection/220381

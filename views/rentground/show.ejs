@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>HELO</title>
-</head>
-<body>
+<% layout('layouts/boilerplate.ejs') %>
+
     <p>
- <%= `${rentground_data.title} on (( ${rentground_data.location} ))` %>
+ <%= `${rentground_data.title} on (( ${rentground_data.location} )) and PRICE IS ${rentground_data.price}` %>
     </p>
+
+    <img src='<%=rentground_data.image%>'>
+
+
+
 <form method="POST" action="/rentgrounds/<%=rentground_data._id%>?_method=DELETE">
     <button>DELETE</button>
 
@@ -18,5 +19,3 @@
  	<a href="/rentgrounds">SHOW ALL Rent Near Me</a>
 
  </footer>
-</body>
-</html>

@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const rentGround = require('./models/rentGround.js');
 const path = require('path');
 const methodOverride = require('method-override');
+const engine = require('ejs-mate');
 
 const app = express();
 const port = 3000;
@@ -12,7 +13,8 @@ mongoose.connect('mongodb://localhost:27017/rentAPP',
 	{
 	 useNewUrlParser: true,
 	 useUnifiedTopology: true,
-	 useCreateIndex: true
+	 useCreateIndex: true,
+	 useFindAndModify: false
 	})
 .then(()=>{
 	console.log('FINE');
@@ -24,9 +26,10 @@ mongoose.connect('mongodb://localhost:27017/rentAPP',
 
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
+app.engine('ejs', engine);
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname,'views'));
+app.set('views', path.join(__dirname,'views')); //app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
   res.render('index');
