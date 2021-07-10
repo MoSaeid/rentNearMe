@@ -29,7 +29,8 @@ app.use(methodOverride('_method'));
 app.engine('ejs', engine);
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname,'views')); //app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname,'views')); //app.set('views', __dirname + '/views');
+
 
 app.get('/', (req, res) => {
   res.render('index');
