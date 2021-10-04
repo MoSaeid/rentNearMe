@@ -4,7 +4,8 @@
   "description": "Web app helps users to publish and find places to rent or sale",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+"start": "node app.js"
   },
   "author": "Mohammed Z. Saeid",
   "license": "ISC",

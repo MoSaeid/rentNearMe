@@ -1,21 +1,53 @@
 <% layout('layouts/boilerplate.ejs') %>
 
-    <p>
+  <div class="row">
+        <p>
  <%= `${rentground_data.title} on (( ${rentground_data.location} )) and PRICE IS ${rentground_data.price}` %>
     </p>
 
+
+
+
+
+ <div class="col-6">
     <img src='<%=rentground_data.image%>'>
 
+    <form method="POST" action="/rentgrounds/<%=rentground_data._id%>?_method=DELETE">
+        <button>DELETE</button>
+    </form>
+    <a href="/rentgrounds/<%=rentground_data._id%>/edit">EDIT</a>
+    <br>
+    <a href="/rentgrounds">SHOW ALL Rent Near Me</a>
 
 
-<form method="POST" action="/rentgrounds/<%=rentground_data._id%>?_method=DELETE">
-    <button>DELETE</button>
+    <form action="/rentgrounds/<%=rentground_data._id%>/reviews" method="POST">
+        <div class="mb-3">
+            <input class="form-range" type="range" min="1" max="5" name="rating">
+            <label class="form-label" for="review-body">Your Review</label>
+            <textarea class="form-control" id="review-body" name="body"></textarea>
 
-</form>
+            <button class="btn btn-success">Submit Review</button>
+        </div>
 
- <footer>
- 	<a href="/rentgrounds/<%=rentground_data._id%>/edit">EDIT</a>
- 	<br>
- 	<a href="/rentgrounds">SHOW ALL Rent Near Me</a>
+    </form>
 
- </footer>
+
+ </div>
+
+ <div class="col-6">
+                 <% for(let review of rentground_data.reviews) { %>
+        <div class="card mb-3 ">
+            <div class="card-body">
+                <h5 class="card-title">Rating: <%= review.rating %></h5>
+                <p class="card-text">Review: <%= review.body %></p>
+                
+                <form action="/rentgrounds/<%=rentground_data._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+        <% } %>
+
+ </div>
+
+  </div>
