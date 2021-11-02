@@ -7,10 +7,14 @@ const rentGroundSchema = new Schema({
 	description:String,
 	location:String,
 	image: String,
+	author:{
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	},
 	reviews:[
 		{
 			type: Schema.Types.ObjectId,
-			ref: "Review"	
+			ref: "Review"
 		}
 
 	]
@@ -18,5 +22,5 @@ const rentGroundSchema = new Schema({
 });
 
 
-module.exports = 
+module.exports =
 	mongoose.model('Ground', rentGroundSchema);

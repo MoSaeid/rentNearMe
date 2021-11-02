@@ -1,11 +1,15 @@
 <% layout('layouts/boilerplate.ejs') %>
-
+<div class="container">
+	<div class="card">
 	<ul>
 		<% for(let i of rentground_data) { %>
+<div class="card bg-light dark">
+		<a href="/rentgrounds/<%=i._id%>"><%= `${i.title} on (( ${i.location} ))` %></a> <br>
 
-		  <a href="/rentgrounds/<%=i._id%>"><%= `${i.title} on (( ${i.location} ))` %></a> <br>
-		  		  
 		<% } %>
 	</ul>
+</div>
+</div>
+</div>
 
-	<a href="/rentgrounds/new"> NEW Rent AD</a>
+<a href="/rentgrounds/new"> NEW Rent AD</a>

@@ -1,0 +1,19 @@
+<% layout('layouts/boilerplate.ejs') %>
+<div class="mt-5">
+    <form action="/register" method="POST">
+        <div class="input-group mb-3">
+            <span class="input-group-text">@</span>
+            <input type="text" class="form-control" name="username" placeholder="Username">
+        </div>
+
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="email" placeholder="Email">
+        </div>
+
+        <div class="input-group mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Password">
+
+        </div>
+        <button type="submit" class="btn btn-primary ">Signup</button>
+    </form>
+</div>

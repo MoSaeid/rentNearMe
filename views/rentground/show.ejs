@@ -1,23 +1,30 @@
 <% layout('layouts/boilerplate.ejs') %>
-
   <div class="row">
-        <p>
- <%= `${rentground_data.title} on (( ${rentground_data.location} )) and PRICE IS ${rentground_data.price}` %>
-    </p>
-
-
-
-
+ 
 
  <div class="col-6">
-    <img src='<%=rentground_data.image%>'>
+     
+    <div class="card">
+        <div class="card-body">
+            <%= `${rentground_data.title} on (( ${rentground_data.location} )) and PRICE IS ${rentground_data.price} - POSTED BY ${rentground_data.author.username}` %>
+        </div>
+      </div>
 
-    <form method="POST" action="/rentgrounds/<%=rentground_data._id%>?_method=DELETE">
-        <button>DELETE</button>
+
+    <img src='<%=rentground_data.image%>'>
+    <% if (currentUser && rentground_data.author.equals(currentUser._id)) { %>
+         <form method="POST" action="/rentgrounds/<%=rentground_data._id%>?_method=DELETE">
+        <button class="btn button btn-danger">DELETE</button>
     </form>
-    <a href="/rentgrounds/<%=rentground_data._id%>/edit">EDIT</a>
+    
+    <a class="btn button btn-warning" href="/rentgrounds/<%=rentground_data._id%>/edit">EDIT</a>
+
+    <% } else { %>
+        <h3>you are not the owner</h3>
+    <% } %> 
     <br>
-    <a href="/rentgrounds">SHOW ALL Rent Near Me</a>
+
+    <a class="button btn-success btn" href="/rentgrounds">SHOW ALL Rent Near Me</a>
 
 
     <form action="/rentgrounds/<%=rentground_data._id%>/reviews" method="POST">
