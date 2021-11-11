@@ -2,7 +2,7 @@
   <div class="row">
  
 
- <div class="col-6">
+ <div class="col-6" style="text-align: center">
      
     <div class="card">
         <div class="card-body">
@@ -13,7 +13,7 @@
 
     <img src='<%=rentground_data.image%>'>
     <% if (currentUser && rentground_data.author.equals(currentUser._id)) { %>
-         <form method="POST" action="/rentgrounds/<%=rentground_data._id%>?_method=DELETE">
+         <form style="display: inline-block" method="POST" action="/rentgrounds/<%=rentground_data._id%>?_method=DELETE">
         <button class="btn button btn-danger">DELETE</button>
     </form>
     
@@ -22,21 +22,23 @@
     <% } else { %>
         <h3>you are not the owner</h3>
     <% } %> 
-    <br>
+    
 
     <a class="button btn-success btn" href="/rentgrounds">SHOW ALL Rent Near Me</a>
 
-
-    <form action="/rentgrounds/<%=rentground_data._id%>/reviews" method="POST">
+<% if (currentUser) { %>
+    <form action="/rentground/<%=rentground_data._id%>/review" method="POST">
         <div class="mb-3">
             <input class="form-range" type="range" min="1" max="5" name="rating">
             <label class="form-label" for="review-body">Your Review</label>
             <textarea class="form-control" id="review-body" name="body"></textarea>
 
-            <button class="btn btn-success">Submit Review</button>
+            <button type="submit" class="btn btn-success">Submit Review</button>
         </div>
 
     </form>
+
+<% } %>
 
 
  </div>
@@ -47,10 +49,11 @@
             <div class="card-body">
                 <h5 class="card-title">Rating: <%= review.rating %></h5>
                 <p class="card-text">Review: <%= review.body %></p>
-                
+                <% if (currentUser && rentground_data.author.equals(currentUser._id)) { %>
                 <form action="/rentgrounds/<%=rentground_data._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
                     <button class="btn btn-sm btn-danger">Delete</button>
                 </form>
+                <% } %> 
             </div>
         </div>
         <% } %>

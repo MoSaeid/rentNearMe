@@ -110,7 +110,6 @@ app.get('/rentgrounds/new', isLoggedIn, async (req, res) => { //(Add) -to add ne
 app.post('/rentgrounds', isLoggedIn, catchAsync(async (req, res) => { //POST reqeust to add data in database
 	const rentground_data = req.body;
 	rentground_data.author = req.user._id;
-	console.log(rentground_data);
 	const blah = new rentGround(rentground_data);
 	await blah.save();
 	req.flash('success', 'Successfuly added to the database!');
@@ -120,16 +119,19 @@ app.post('/rentgrounds', isLoggedIn, catchAsync(async (req, res) => { //POST req
 
 
 app.get('/rentgrounds/:id', async (req, res) => { // to show spicific record details in the page (via ID)
-	const rentground_data = await rentGround.findById(req.params.id).populate('reviews').populate('author');
-	// console.log(rentground_data);
-	// console.log(req.user);
-	if (!rentground_data) {
-		req.flash('error', 'Opps, this Ad not avalible!!');
-		return res.redirect('/rentgrounds')
+	try {
+		const rentground_data = await rentGround.findById(req.params.id).populate('reviews').populate('author');
+		if (!rentground_data) {
+			req.flash('error', 'Opps, this Ad not avalible!!');
+			return res.redirect('/rentgrounds')
+		}
+		res.render('rentground/show', {
+			rentground_data
+		});
+	
+	} catch (error) {
+		res.redirect('/');
 	}
-	res.render('rentground/show', {
-		rentground_data
-	});
 })
 
 
@@ -138,7 +140,6 @@ app.get('/rentgrounds/:id/edit', isLoggedIn, isAuthor, async (req, res) => { // 
 	res.render('rentground/edit', {
 		rentground_data
 	});
-	console.log(rentground_data);
 
 })
 
@@ -147,7 +148,6 @@ app.put('/rentgrounds/:id', isLoggedIn, isAuthor, async (req, res) => { // PUT r
 	const rentground_data = await rentGround.findByIdAndUpdate(id, {...req.body});
 	req.flash('success', 'Successfuly updated!');
 	res.redirect(`/rentgrounds/${rentground_data._id}`);
-	// console.log(rentground_data);
 });
 
 app.delete('/rentgrounds/:id',isLoggedIn, async (req, res) => { // DELETE request by clicking delete button from ('/rentgrounds/:id' route)
@@ -158,12 +158,14 @@ app.delete('/rentgrounds/:id',isLoggedIn, async (req, res) => { // DELETE reques
 });
 
 //Reviews Routes
-app.post('/rentgrounds/:id/reviews',isLoggedIn, async (req, res) => {
-	const rentground_data = await rentGround.findById(req.params.id)
-	const reviews = new Review(req.body)
-	rentground_data.reviews.push(reviews)
-	await rentground_data.save()
-	await reviews.save()
+app.post('/rentground/:id/review',isLoggedIn, async (req, res) => {
+	console.log(req.params);
+	const rentground_data = await rentGround.findById(req.params.id);
+	const review = new Review(req.body);
+	review.author = req.user._id;
+	rentground_data.reviews.push(review);
+	await review.save();
+	await rentground_data.save();
 	req.flash('success', 'Created new Review!');
 	res.redirect(`/rentgrounds/${req.params.id}`)
 
@@ -201,7 +203,6 @@ app.post('/register', async (req, res) => {
 			username
 		});
 		const registeredUser = await User.register(user, password);
-		console.log(registeredUser);
 		req.flash('success', 'You registerd successfully, welcome to RentNearME');
 		res.redirect('/rentgrounds');
 
