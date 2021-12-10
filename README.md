@@ -8,3 +8,7 @@ web app
 #thing to improve
 - database efficiency
 - better design (UI/UX)
+
+#TODO:
+- catchAsync and ExpressError , wrap all async functions in catchAsync, and complete Error handling
+- Validations, in front and backend
