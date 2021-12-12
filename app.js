@@ -71,7 +71,6 @@ app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views')); // app.set('views', `${__dirname}/views`); this line is better than the path.join
 
-
 //Routes
 app.get('/', (req, res) => { // (Home)
 	res.render('index');
