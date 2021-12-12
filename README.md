@@ -1,4 +1,4 @@
-# rent_near_me
+# rentNearMe
 web app 
 
 ##KNOWING BUGS:
